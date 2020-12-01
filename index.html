@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CFDTS - web CFD flow simulation</title>
   <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <style>
     .section-title{
       font-weight: bold;
@@ -14,6 +18,15 @@
       display:none;
     }
     .section-closed>.section-title{
+      text-decoration: underline;
+    }
+    /* faq */
+    .faq-item{
+      margin-top: 1rem;
+    }
+    .faq-question{
+      font-size: 1.2rem;
+      font-weight: bolder;
       text-decoration: underline;
     }
   </style>
@@ -33,6 +46,9 @@
         </li>
         <li class="nav-item">
           <a id="btn-Pulse" class="nav-link" href="#">Pulse</a>
+        </li>
+        <li class="nav-item">
+          <a id="btn-about" class="nav-link" href="#" onclick="document.getElementById('about').classList.toggle('d-none');">About</a>
         </li>
       </ul>
     </div>
@@ -123,9 +139,82 @@
       </div>
       <div class="col-xl-10 col-md-9 col-sm-7 bd-toc" id="simulationWrapper">
         <canvas id="simulationArea" width="600" height="240"></canvas>
+        <div id="about" class="d-none">
+          This is a very rudimentary Computational Fluid Dynamics (CFD) simulation based on the <a href="https://en.wikipedia.org/wiki/Lattice_Boltzmann_methods" target="_blank">Lattice Boltzmann Methods</a>.
+          <br>
+          Most of the hard work comes from <a href="http://physics.weber.edu/schroeder/fluids/" target="_blank">here</a>, and most of the work done was to convert the code to typescript with a smidge of cosmetics ;).
+          <div class="faq">
+            FaQ
+            <div class="faq-item">
+              <div class="faq-question">Can it be used for something ?</div>
+              <div class="faq-answer animate__animated d-none">
+                HELL NO ! hhhmmm, sorry, no not really, you can't do much except have some giggles with it :
+                <ul>
+                  <li>There is no notion of time.</li>
+                  <li>You are limited in the fluid speed.</li>
+                  <li>As of now it is painfully slow as it is CPU only, I started using GPU.js but my implementation is buggy and it's taking me forever, I might finish that and publish it in the future.</li>
+                </ul>
+                It could give you a better idea of what is happening or do quick and dirty test as you can plop an SVG or a PNG and test stuff.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">It keeps crashing !</div>
+              <div class="faq-answer animate__animated d-none">
+                Yeah, like I said, limited. You could try a few things to help though :
+                <ul>
+                  <li>
+                    reduce flow speed
+                  </li>
+                  <li>
+                    sharp angles tend to accelerate fluid dramatically in this simulation, try rounding off the edges ;)
+                  </li>
+                  <li>
+                    if you are using pulse, reduce speed, stick to pressure close to 1, pulse for a shorter time, space out pulses.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">Why..., why did you do that 0_o ??!</div>
+              <div class="faq-answer animate__animated d-none">
+                <p>
+                  TLDR : I couldn't run a single CFD simlation easily on a design I created and I just wanted to see if it was kind of the begining of an idea (no, it was not) so I found something I could use and modified it for my purposes.
+                </p>
+                <p>
+                  Long story, I follow Integza on youtube and he's working on pulsejet and wanted to use a Tesla valve as an inlet, it didn't work as expected.
+                  <br>
+                  BUUUUT, It gave me a "revolutionary idea"™ for a better Tesla valve that I was going to call "hyper-diodicitic conduit", I sent him a enthousiast email and set ou to design the thing on Fusion.
+                  <br>
+                  Couple of hours and a prototype design I just needed to run CFD simulation and it was going to be awesome !
+                  <br>
+                  Riiiight, one small problem though.... none of the software I found worked, local or online.... obviously, I needed to learn how to use them...
+                  <br>
+                  wooooh, look at that shinny toy, it's in javascript, I speak that, I'll probably spend less time modifing it than learning proper CFD, and it's for testing purposes anyway.
+                  <br>
+                  You know the rest as you are here ;)
+                </p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question"></div>
+              <div class="faq-answer animate__animated d-none"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <script>
+    window.addEventListener('load', () => {
+      let questions = document.getElementsByClassName('faq-question');
+      for(let question of questions) {
+        question.addEventListener('click', (evt) => {
+          evt.target.nextElementSibling.classList.toggle('animate__fadeInDown')
+          evt.target.nextElementSibling.classList.toggle('d-none')
+        });
+      }
+    });
+  </script>
   <script src="build/bundle.js"></script>
   <script>
     // var lbm = new LBM(10, 10, 0.02);
