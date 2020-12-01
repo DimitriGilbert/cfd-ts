@@ -1,0 +1,21 @@
+{
+  "name": "cfdts",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-app": "./node_modules/.bin/esbuild index.ts --bundle --outfile=./build/bundle.js",
+    "build-worker": "./node_modules/.bin/esbuild ./src/worker.ts --bundle --outfile=./build/worker.js",
+    "build": "npm run build-app"
+  },
+  "author": "DimitriGilbert",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "bootswatch": "^4.5.3",
+    "esbuild": "^0.8.12",
+    "gpu.js": "^2.10.5",
+    "typescript": "^4.1.2"
+  }
+}
