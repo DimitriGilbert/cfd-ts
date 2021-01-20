@@ -1,4 +1,18 @@
-import { ColliderData } from "./collider";
+export type ColliderData = {
+  n0: Array<number>
+  nN: Array<number>
+  nS: Array<number>
+  nE: Array<number>
+  nW: Array<number>
+  nNE: Array<number>
+  nSE: Array<number>
+  nNW: Array<number>
+  nSW: Array<number>
+  rho: Array<number>
+  ux: Array<number>
+  uy: Array<number>
+  barrier?: Array<boolean>
+}
 
 // abbreviations
 export const four9ths = 4.0 / 9.0;
